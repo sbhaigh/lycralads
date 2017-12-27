@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lycra Lads</title>
+    <link rel="stylesheet" href="bootstrap-material-design-master/dist/css/bootstrap-material-design.min.css">
+    <script src="js/tabletop.min.js"></script>
+    <script type='text/javascript'>
+        var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1vhMCeXUj6xCDBul0sZq4GC3RhZMheP_huSzXgYuEfeY/pubhtml';
+
+        function init() {
+            Tabletop.init( { key: publicSpreadsheetUrl,
+                callback: showInfo,
+                simpleSheet: false } )
+        }
+
+        function showInfo(data, tabletop) {
+            var today = new Date();
+            var year = today.getFullYear();
+
+            var thisYearsSheet = tabletop.sheets(year);
+            console.log(year);
+            console.log(thisYearsSheet);
+
+            var count = 0;
+
+            // data comes through as a simple array since simpleSheet is turned on
+            var div = document.getElementById('data'),
+                html = "<h1>" + year + "</h1>",
+                prop, i;
+
+            html = html + "<table class='table table-bordered'><thead><tr>"
+            for(i = 0; i < thisYearsSheet.originalColumns.length; i++) {
+                    // lookup the pretty name from the value in this array
+                    var prettyName = thisYearsSheet.prettyColumns;
+
+                    html = html + "<th>" + thisYearsSheet.columnNames[i] + "</th>";
+
+            }
+            html = html + "</tr></thead><tbody class='table-striped'>";
+
+            for(i = 0; i < thisYearsSheet.elements.length; i++) {
+                html = html + "<tr>";
+                for(prop in thisYearsSheet.elements[i]) {
+                    html = html + "<td>" + thisYearsSheet.elements[i][prop] + "</td>";
+                }
+                html = html + "</tr>";
+            }
+            html = html + "</tbody></table>"
+            
+            div.innerHTML = div.innerHTML + html;
+        }
+
+        window.addEventListener('DOMContentLoaded', init)
+    </script>
+</head>
+<body>
+<div id="data"></div>
+
+
+
+</body>
+</html>
