@@ -50,6 +50,7 @@
                         }
                     }
                     dict['numberOfRides'] = rides;
+                    dict['averageSprintPointsPerRide'] = parseInt(thisYearsSheet.elements[1][thisYearsSheet.columnNames[i]]) / rides;
                     summaryStats.push(dict);
                 }
                 html = html + "<th>" + thisYearsSheet.columnNames[i] + "</th>";
