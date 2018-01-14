@@ -16,18 +16,17 @@
         }
 
         function showInfo(data, tabletop) {
-            var today = new Date();
-            var year = today.getFullYear();
-
-            var thisYearsSheet = tabletop.sheets(year);
-            console.log(year);
+            // get a list of tabs and find the latest one (biggest number)
+            var thisYear = tabletop.foundSheetNames[0];
+            var thisYearsSheet = tabletop.sheets(thisYear);
+            console.log(thisYear);
             console.log(thisYearsSheet);
 
             var count = 0;
 
             // data comes through as a simple array since simpleSheet is turned on
             var div = document.getElementById('data'),
-                html = "<h1>" + year + "</h1>",
+                html = "<h1>" + thisYear + "</h1>",
                 prop, i;
 
             html = html + "<table class='table table-bordered'><thead><tr>"
