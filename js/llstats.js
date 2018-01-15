@@ -97,7 +97,7 @@ function drawMilesChart(summaryStats) {
             x: {
                 type: 'category'
             },
-            rotated: false
+            rotated: true
         }
     });
 }
@@ -129,7 +129,7 @@ function drawSprintPointsChart(summaryStats) {
             x: {
                 type: 'category'
             },
-            rotated: false
+            rotated: true
         }
     });
 }
@@ -158,7 +158,7 @@ function drawSprintPointsPerRideChart(summaryStats) {
             x: {
                 type: 'category'
             },
-            rotated: false
+            rotated: true
         }
     });
 }
