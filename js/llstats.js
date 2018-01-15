@@ -60,8 +60,36 @@ function showInfo(data, tabletop) {
     
     div.innerHTML = div.innerHTML + html;
 
+    drawMilesChart(summaryStats);
+    drawSprintPointsChart(summaryStats);
+    drawSprintPointsPerRideChart(summaryStats);
+}
+
+function drawMilesChart(summaryStats) {
     var chart = c3.generate({
-        bindto: '#chart',
+        bindto: '#milesChart',
+        data: {
+            json: 
+                summaryStats
+            ,
+            keys: {
+                x: 'name',
+                value: ['miles']
+            },
+            type: 'bar'
+        },
+        axis: {
+            x: {
+                type: 'category'
+            },
+            rotated: true
+        }
+    });
+}
+
+function drawSprintPointsChart(summaryStats) {
+    var chart = c3.generate({
+        bindto: '#sprintPointsChart',
         data: {
             json: 
                 summaryStats
@@ -69,6 +97,28 @@ function showInfo(data, tabletop) {
             keys: {
                 x: 'name',
                 value: ['sprintPoints']
+            },
+            type: 'bar'
+        },
+        axis: {
+            x: {
+                type: 'category'
+            },
+            rotated: true
+        }
+    });
+}
+
+function drawSprintPointsPerRideChart(summaryStats) {
+    var chart = c3.generate({
+        bindto: '#sprintPointsPerRideChart',
+        data: {
+            json: 
+                summaryStats
+            ,
+            keys: {
+                x: 'name',
+                value: ['averageSprintPointsPerRide']
             },
             type: 'bar'
         },
