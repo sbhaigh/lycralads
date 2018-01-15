@@ -1,4 +1,4 @@
-var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1vhMCeXUj6xCDBul0sZq4GC3RhZMheP_huSzXgYuEfeY/pubhtml';
+var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1Di24NagrlrnISEgqANXngIqVPgLagZy11wJXW-fTr-w/pubhtml';
 
 function init() {
     Tabletop.init( { key: publicSpreadsheetUrl,
@@ -76,13 +76,21 @@ function drawMilesChart(summaryStats) {
                 x: 'name',
                 value: ['miles']
             },
-            type: 'bar'
+            names: {
+                miles: 'Miles Ridden'
+            },
+            colors: {
+                miles: '#156831'
+            },                  
+            type: 'bar',
+            order: 'desc',
+            labels: true
         },
         axis: {
             x: {
                 type: 'category'
             },
-            rotated: true
+            rotated: false
         }
     });
 }
@@ -94,17 +102,27 @@ function drawSprintPointsChart(summaryStats) {
             json: 
                 summaryStats
             ,
+            line: {
+                connectNull: true
+            },            
             keys: {
                 x: 'name',
                 value: ['sprintPoints']
             },
-            type: 'bar'
+            names: {
+                sprintPoints: 'Sprint Points'
+            },
+            colors: {
+                sprintPoints: '#156831'
+            },
+            type: 'bar',
+            labels: true
         },
         axis: {
             x: {
                 type: 'category'
             },
-            rotated: true
+            rotated: false
         }
     });
 }
@@ -120,13 +138,20 @@ function drawSprintPointsPerRideChart(summaryStats) {
                 x: 'name',
                 value: ['averageSprintPointsPerRide']
             },
-            type: 'bar'
+            names: {
+                averageSprintPointsPerRide: 'Average Sprint Points Per Ride'
+            },
+            colors: {
+                averageSprintPointsPerRide: '#156831'
+            },             
+            type: 'bar',
+            labels: true
         },
         axis: {
             x: {
                 type: 'category'
             },
-            rotated: true
+            rotated: false
         }
     });
 }
