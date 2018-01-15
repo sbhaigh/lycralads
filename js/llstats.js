@@ -65,12 +65,19 @@ function showInfo(data, tabletop) {
     drawSprintPointsPerRideChart(summaryStats);
 }
 
+function sortByKey(array, key) {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+    });
+}
+
 function drawMilesChart(summaryStats) {
     var chart = c3.generate({
         bindto: '#milesChart',
         data: {
             json: 
-                summaryStats
+                sortByKey(summaryStats, 'miles')
             ,
             keys: {
                 x: 'name',
@@ -100,7 +107,7 @@ function drawSprintPointsChart(summaryStats) {
         bindto: '#sprintPointsChart',
         data: {
             json: 
-                summaryStats
+                sortByKey(summaryStats, 'sprintPoints')
             ,
             line: {
                 connectNull: true
@@ -132,7 +139,7 @@ function drawSprintPointsPerRideChart(summaryStats) {
         bindto: '#sprintPointsPerRideChart',
         data: {
             json: 
-                summaryStats
+            sortByKey(summaryStats, 'averageSprintPointsPerRide')
             ,
             keys: {
                 x: 'name',
