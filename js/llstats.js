@@ -47,6 +47,8 @@ function showInfo(data, tabletop) {
         html = html + "<th>" + thisYearsSheet.columnNames[i] + "</th>";
     }
     console.log(summaryStats);
+        // data loaded, hide the loader
+        document.getElementById('loader_wrapper').style.display = 'none';
     html = html + "</tr></thead><tbody class='table-striped'>";
 
     for(i = 0; i < thisYearsSheet.elements.length; i++) {
