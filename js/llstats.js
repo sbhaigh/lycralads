@@ -61,12 +61,22 @@ function showInfo(data, tabletop) {
     
     div.innerHTML = div.innerHTML + html;
 
+    updateTotalMiles(summaryStats);
+
     drawMilesChart(summaryStats);
     drawSprintPointsChart(summaryStats);
     drawSprintPointsPerRideChart(summaryStats);
 
     // data loaded, hide the loader
     document.getElementById('loader_wrapper').style.display = 'none';
+}
+
+function updateTotalMiles(summaryStats) {
+    var totalMiles = 0;
+    for(i=0; i<summaryStats.length; i++) {
+        totalMiles = totalMiles + summaryStats[i].miles;
+    }
+    document.getElementById('clubmiles').textContent = totalMiles;
 }
 
 function sortByKey(array, key) {
