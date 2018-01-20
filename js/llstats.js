@@ -1,6 +1,7 @@
 var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1Di24NagrlrnISEgqANXngIqVPgLagZy11wJXW-fTr-w/pubhtml';
 
 function init() {
+    console.log("init");
     Tabletop.init( { key: publicSpreadsheetUrl,
         callback: showInfo,
         simpleSheet: true } )
@@ -67,16 +68,36 @@ function showInfo(data, tabletop) {
     drawSprintPointsChart(summaryStats);
     drawSprintPointsPerRideChart(summaryStats);
 
+    // call the page functions
+    startPage();
     // data loaded, hide the loader
     document.getElementById('loader_wrapper').style.display = 'none';
 }
 
 function updateTotalMiles(summaryStats) {
     var totalMiles = 0;
+    sortByKey(summaryStats, 'miles');
     for(i=0; i<summaryStats.length; i++) {
         totalMiles = totalMiles + summaryStats[i].miles;
     }
-    document.getElementById('clubmiles').textContent = totalMiles;
+    // update the top 6 for the homepage
+    var nums = document.getElementById("miles");
+    var listItem = $(".skills_row");
+    var highestMilege = summaryStats[0].miles.toFixed(0);
+    var lowestMilege = summaryStats[5].miles.toFixed(0);
+    var range = highestMilege - lowestMilege;
+    console.log(highestMilege, lowestMilege, range);
+    var increment = 0;
+    var percentage = 0;
+
+    for(j=0; j<6;j++) {
+        increment = summaryStats[j].miles.toFixed(0)-lowestMilege;
+        percentage = ((increment/range) * 100).toFixed('2');
+        $(listItem[j]).find(".value").html(summaryStats[j].miles.toFixed(0) + "<br />Miles");
+        $(listItem[j]).find(".progress").attr('data-process', percentage + "%");
+        $(listItem[j]).find(".caption").html(summaryStats[j].name);
+    }
+    document.getElementById('clubmiles').textContent = totalMiles.toFixed(0) + " miles";
 }
 
 function sortByKey(array, key) {

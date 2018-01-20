@@ -197,9 +197,9 @@ h6{font-size: 10px; text-transform: uppercase; letter-spacing: 4px;}
 .skills_row .progressbar{width:50px;position:relative;margin:20px 0;}
 .skills_row .progress{width:100%;height:280px;}
 .skills_row .foot{width:100%;height:11px;}
-.skills_row .progress .before{width:0;border-bottom:25px solid #f7f3c6;border-left:25px solid transparent;position:absolute;left:0;z-index:2;bottom:11px;}
+.skills_row .progress .before{width:0;border-bottom:25px solid #fbe038;border-left:25px solid transparent;position:absolute;left:0;z-index:2;bottom:11px;}
 .skills_row .progress .after{width:0;border-bottom:25px solid #c0c192;border-right:25px solid transparent;position:absolute;right:0;z-index:2;bottom:11px;}
-.skills_row .foot::before{content:'';width:0;height:0;border-top:11px solid #f7f3c6;border-left:25px solid transparent;position:absolute;bottom:0;left:0;z-index:3;}
+.skills_row .foot::before{content:'';width:0;height:0;border-top:11px solid #fbe038;border-left:25px solid transparent;position:absolute;bottom:0;left:0;z-index:3;}
 .skills_row .foot::after{content:'';width:0;height:0;border-top:11px solid #c0c192;border-right:25px solid transparent;position:absolute;bottom:0;right:0;z-index:3;}
 .skills_row .progressbar .shadow{content:'';width:0;height:0;border-bottom:22px solid #669c75;border-right:40px solid transparent;position:absolute;left:25px;bottom:-1px;z-index:1;}
 .skills_row.brown .progressbar .shadow{border-bottom:22px solid #b3a45d;}
