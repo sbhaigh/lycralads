@@ -1,21 +1,7 @@
 var windowWidth = jQuery(window).width();
 var finish = -1 * ((windowWidth - jQuery('#scene_1').width()) / 2 + 1260);
 var start = (windowWidth - (windowWidth - jQuery('#scene_1').width()) / 2) + 160;
-/*
-jQuery(document).ready(function () {
-	"use strict";
-	console.log("ready");
-	if(jQuery.cookie('layout') == 'boxed')
-	{
-		jQuery('head').append('<link rel="stylesheet" type="text/css" href="css/responsiveboxed.css">');
-		jQuery('body').addClass('boxed');
-		jQuery('.panel #boxed').addClass('active');
-		jQuery('.panel #wide').removeClass('active');
-	}
 
-});*/
-
-//jQuery(window).on('load',function () {
 function startPage() {
     "use strict";
 	console.log("load");
@@ -405,45 +391,6 @@ function startPage() {
 		jQuery('.panel').slideUp();
 		jQuery('.custom_overflow').remove();
 	});
-	
-	
-	jQuery('.panel #boxed').click(function(){ 
-		jQuery('body').addClass('boxed'); 
-		jQuery('head').append('<link id="boxedstyle" rel="stylesheet" type="text/css" href="css/responsiveboxed.css">');
-		jQuery.cookie('layout', 'boxed');
-		jQuery('.panel #boxed').addClass('active');
-		jQuery('.panel #wide').removeClass('active');
-		
-		if (jQuery('.box').width() > 1230) Gallery(4);
-		if (jQuery('.box').width() <= 1230) Gallery(3);
-		if (jQuery('.box').width() <= 984) Gallery(2);
-		if (jQuery('.box').width() <= 440) Gallery(1);
-	});
-	
-	jQuery('.panel #wide').click(function(){ 
-		jQuery('body').removeClass('boxed'); jQuery('#boxedstyle').remove();
-		jQuery.cookie('layout', 'wide');
-		jQuery('.panel #boxed').removeClass('active');
-		jQuery('.panel #wide').addClass('active');
-				
-		if (jQuery(window).width() > 1170) Gallery(4);
-		if (jQuery(window).width() <= 1170) Gallery(3);
-		if (jQuery(window).width() <= 984) Gallery(2);
-		if (jQuery(window).width() <= 440) Gallery(1);
-	});
-	
-	
-	jQuery('.panel .background div, .panel .patterns div').click(function(){
-		var x = jQuery(this).attr('class');
-		jQuery('.body_background').removeClass('pattern1 pattern2 pattern3 pattern4 pattern5 pattern6 background1 background2 background3 background4 background5 background6').addClass(x);
-		jQuery.cookie('background', x);
-	});
-	
-		if(jQuery.cookie('background') != null){
-		var bg = jQuery.cookie('background');
-		jQuery('.body_background').addClass(bg);
-	}
-	
 	
 };
 

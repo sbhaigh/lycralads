@@ -93,6 +93,11 @@ function updateTotalMiles(summaryStats) {
     for(j=0; j<6;j++) {
         increment = summaryStats[j].miles.toFixed(0)-lowestMilege;
         percentage = ((increment/range) * 100).toFixed('2');
+        
+        if(percentage==='0.00') {
+            percentage='5.00';
+        }
+        console.log(summaryStats[j].miles,percentage);
         $(listItem[j]).find(".value").html(summaryStats[j].miles.toFixed(0) + "<br />Miles");
         $(listItem[j]).find(".progress").attr('data-process', percentage + "%");
         $(listItem[j]).find(".caption").html(summaryStats[j].name);
