@@ -7,24 +7,18 @@ function init() {
         simpleSheet: true } )
 }
 
+function isInArray(value, array) {
+    return array.indexOf(value) > -1;
+}
+
 function showInfo(data, tabletop) {
     // get a list of tabs and find the latest one (biggest number)
     var thisYear = tabletop.foundSheetNames[0];
     var thisYearsSheet = tabletop.sheets(thisYear);
-    console.log(thisYearsSheet);
-
     var count = 0;
-    var div = document.getElementById('data'),
-        html = "<h1>" + thisYear + "</h1>",
-        prop, i;
-
-    html = html + "<table class='table table-bordered'><thead><tr>"
-
     var summaryStats = new Array();
     var excludes = new Array('x', 'Av. speed', 'Sprint - 1st', 'Sprint - 2nd', 'Sprint - 3rd', 'Route');
-    function isInArray(value, array) {
-        return array.indexOf(value) > -1;
-    }
+
     // for each column add the riders name, distance and sprint points to a dictionary
     for(i = 0; i < thisYearsSheet.originalColumns.length; i++) {
         if(!isInArray(thisYearsSheet.columnNames[i], excludes)) {
@@ -45,33 +39,40 @@ function showInfo(data, tabletop) {
                 summaryStats.push(dict);
             }
         }
-        html = html + "<th>" + thisYearsSheet.columnNames[i] + "</th>";
     }
     console.log(summaryStats);
-        
-    html = html + "</tr></thead><tbody class='table-striped'>";
-
-    for(i = 0; i < thisYearsSheet.elements.length; i++) {
-        html = html + "<tr>";
-        for(prop in thisYearsSheet.elements[i]) {
-            html = html + "<td>" + thisYearsSheet.elements[i][prop] + "</td>";
-        }
-        html = html + "</tr>";
-    }
-    html = html + "</tbody></table>"
-    
-    div.innerHTML = div.innerHTML + html;
-
     updateTotalMiles(summaryStats);
 
     drawMilesChart(summaryStats);
+    filterZeros(summaryStats);
     drawSprintPointsChart(summaryStats);
+    console.log(summaryStats);
+    console.log(summaryStats.length);
     drawSprintPointsPerRideChart(summaryStats);
 
     // call the page functions
     startPage();
     // data loaded, hide the loader
     document.getElementById('loader_wrapper').style.display = 'none';
+}
+
+function remove(array, element) {
+    const index = array.indexOf(element);
+    if (index !== -1) {
+        array.splice(index, 1);
+    }
+}
+
+function filterZeros(summaryStats) {
+    for(i=0;i<summaryStats.length;i++)
+    {
+        if(summaryStats[i].sprintPoints === 0) {
+            //console.log(summaryStats[i]);
+            remove(summaryStats, summaryStats[i]);
+        } else {
+            console.log(summaryStats[i]);
+        }
+    }
 }
 
 function updateTotalMiles(summaryStats) {
@@ -86,7 +87,6 @@ function updateTotalMiles(summaryStats) {
     var highestMilege = summaryStats[0].miles.toFixed(0);
     var lowestMilege = summaryStats[5].miles.toFixed(0);
     var range = highestMilege - lowestMilege;
-    console.log(highestMilege, lowestMilege, range);
     var increment = 0;
     var percentage = 0;
 
@@ -97,7 +97,7 @@ function updateTotalMiles(summaryStats) {
         if(percentage==='0.00') {
             percentage='5.00';
         }
-        console.log(summaryStats[j].miles,percentage);
+        //console.log(summaryStats[j].miles,percentage);
         $(listItem[j]).find(".value").html(summaryStats[j].miles.toFixed(0) + "<br />Miles");
         $(listItem[j]).find(".progress").attr('data-process', percentage + "%");
         $(listItem[j]).find(".caption").html(summaryStats[j].name);
